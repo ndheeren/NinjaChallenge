@@ -1,0 +1,82 @@
+<html>
+    <body>
+        <div id='background'>
+            <div id='character' style='position:absolute; top: 100px; left: 450px; background-image: url("resources/img/down1.png"); width:59px; height:86px;'></div>
+        </div>
+        <script type="text/javascript">
+            
+            var leftValue = 450;
+            var topValue = 100;
+            var direction = "down";
+            var stepNumber = 1;
+
+            function updatePosition()
+            {
+                document.getElementById("character").style.left = leftValue+"px";
+                document.getElementById("character").style.top = topValue+"px";
+                document.getElementById("character").style.backgroundImage = "url('resources/img/" + direction + "" + stepNumber + ".png')";
+
+                console.log("leftValue = " + leftValue + " | topValue = " + topValue);
+            }
+
+            function alternateStep() 
+            {
+                if (stepNumber == 1) 
+                {
+                    stepNumber = 2;
+                }
+                else 
+                {
+                    stepNumber = 1;
+                }
+            }
+
+            document.onkeydown = function(e)
+            {
+                console.log(e);
+
+                // nota bene: the C in 'keyCode' is capitalized
+
+                if (e.keyCode == 37) // left 
+                {
+                    if (leftValue - 10 >= 0) 
+                    {
+                        direction = 'left';
+                        leftValue -= 10;
+                        alternateStep();
+                    }
+                }
+                else if (e.keyCode == 38) // up 
+                {
+                    if (topValue - 10 >= 0) 
+                    {
+                        direction = 'top';
+                        topValue -= 10;
+                        alternateStep();
+                    }
+                }
+                else if (e.keyCode == 39) // right 
+                {
+                    if (leftValue + 10 <= 500)
+                    {
+                        direction = 'right';
+                        leftValue += 10;
+                        alternateStep();
+                    }
+                }
+                else if (e.keyCode == 40) // down 
+                {
+                    if (topValue + 10 <= 500)
+                    {
+                        direction = 'down';
+                        topValue += 10;
+                        alternateStep();
+                    }
+                }
+
+                updatePosition();
+            }
+
+        </script>
+    </body>
+</html>
